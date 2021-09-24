@@ -63,8 +63,6 @@ class BoardState(val state: Array<IntArray>) {
     }
 
     private fun findZero(): Pair<Int, Int>? {
-        //use state.filter for this...
-
         state.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { colIndex, col -> if (col == 0) return Pair(rowIndex, colIndex) }
         }
