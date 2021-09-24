@@ -11,50 +11,62 @@ class BoardState(val state: Array<IntArray>) {
     }
 
     fun moveLeft(): BoardState {
-        val zero = findZero() ?: return BoardState(state)
-        state[zero.first][zero.second]
-        if (zero.second == 0) return BoardState(state)
-        val newState = state.clone()
-        newState[zero.first][zero.second] = state[zero.first][zero.second-1]
-        newState[zero.first][zero.second-1] = 0
-        return BoardState(newState)
+        return findZero()?.let {
+            if (it.second == 0) {
+                BoardState(state)
+            } else {
+                val newState = state.clone()
+                newState[it.first][it.second] = state[it.first][it.second - 1]
+                newState[it.first][it.second - 1] = 0
+                BoardState(newState)
+            }
+        } ?: BoardState(state)
     }
 
-    fun moveRight(): BoardState  {
-        val zero = findZero() ?: return BoardState(state)
-        state[zero.first][zero.second]
-        if (zero.second == state[0].size-1) return BoardState(state)
-        val newState = state.clone()
-        newState[zero.first][zero.second] = state[zero.first][zero.second+1]
-        newState[zero.first][zero.second+1] = 0
-        return BoardState(newState)
+    fun moveRight(): BoardState {
+        return findZero()?.let {
+            if (it.second == state[0].size - 1) {
+                BoardState(state)
+            } else {
+                val newState = state.clone()
+                newState[it.first][it.second] = state[it.first][it.second + 1]
+                newState[it.first][it.second + 1] = 0
+                BoardState(newState)
+            }
+        } ?: BoardState(state)
     }
 
-    fun moveUp(): BoardState  {
-        val zero = findZero() ?: return BoardState(state)
-        state[zero.first][zero.second]
-        if (zero.first == 0) return BoardState(state)
-        val newState = state.clone()
-        newState[zero.first][zero.second] = state[zero.first-1][zero.second]
-        newState[zero.first-1][zero.second] = 0
-        return BoardState(newState)
+    fun moveUp(): BoardState {
+        return findZero()?.let {
+            if (it.first == 0) {
+                BoardState(state)
+            } else {
+                val newState = state.clone()
+                newState[it.first][it.second] = state[it.first - 1][it.second]
+                newState[it.first - 1][it.second] = 0
+                BoardState(newState)
+            }
+        } ?: BoardState(state)
     }
 
-    fun moveDown(): BoardState  {
-        val zero = findZero() ?: return BoardState(state)
-        state[zero.first][zero.second]
-        if (zero.first == state.size-1) return BoardState(state)
-        val newState = state.clone()
-        newState[zero.first][zero.second] = state[zero.first+1][zero.second]
-        newState[zero.first+1][zero.second] = 0
-        return BoardState(newState)
+    fun moveDown(): BoardState {
+        return findZero()?.let {
+            if (it.first == state.size - 1) {
+                BoardState(state)
+            } else {
+                val newState = state.clone()
+                newState[it.first][it.second] = state[it.first + 1][it.second]
+                newState[it.first + 1][it.second] = 0
+                BoardState(newState)
+            }
+        } ?: BoardState(state)
     }
 
     private fun findZero(): Pair<Int, Int>? {
         //use state.filter for this...
 
-        state.forEachIndexed {rowIndex, row ->
-            row.forEachIndexed { colIndex, col -> if (col==0) return Pair(rowIndex, colIndex) }
+        state.forEachIndexed { rowIndex, row ->
+            row.forEachIndexed { colIndex, col -> if (col == 0) return Pair(rowIndex, colIndex) }
         }
         return null
     }
