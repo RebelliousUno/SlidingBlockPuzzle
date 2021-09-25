@@ -4,7 +4,7 @@ enum class SearchType {
     DEPTH, BREADTH
 }
 
-fun main(args: Array<String>) {
+fun main() {
 //    val b = BoardState.randomBoardState()
     val b = BoardState(arrayOf(intArrayOf(1, 0, 2), intArrayOf(3, 4, 5), intArrayOf(6, 7, 8)))
 
@@ -24,7 +24,7 @@ val testedBoardState = ArrayList<BoardState>()
 val boardStateQueue = ArrayList<BoardState>()
 
 fun nonRecurisveSearch(searchType: SearchType): Boolean {
-    var stackSize: Int = 1
+    var stackSize = 1
     var increasing: Boolean
     while (boardStateQueue.isNotEmpty() && boardStateStack.isNotEmpty()) {
 
