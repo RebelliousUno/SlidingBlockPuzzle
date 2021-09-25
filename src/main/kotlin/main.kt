@@ -11,7 +11,7 @@ fun main() {
     println(b)
     boardStateStack.push(b)
     boardStateQueue.add(b)
-    if (nonRecurisveSearch(SearchType.DEPTH)) {
+    if (nonRecursiveSearch(SearchType.DEPTH)) {
         println(testedBoardState.size)
     } else {
         println("Not Solvable")
@@ -23,7 +23,7 @@ val boardStateStack = Stack<BoardState>()
 val testedBoardState = ArrayList<BoardState>()
 val boardStateQueue = ArrayList<BoardState>()
 
-fun nonRecurisveSearch(searchType: SearchType): Boolean {
+fun nonRecursiveSearch(searchType: SearchType): Boolean {
     var stackSize = 1
     var increasing: Boolean
     while (boardStateQueue.isNotEmpty() && boardStateStack.isNotEmpty()) {
